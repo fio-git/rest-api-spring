@@ -1,64 +1,53 @@
-package com.accenture.controller;
+package com.example.controller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.accenture.JavaRestService1Application;
-import com.accenture.bean.InputNumbers;
-import com.accenture.bean.NumbersSum;
-//import com.fasterxml.jackson.core.JsonProcessingException;
-//import com.fasterxml.jackson.databind.JsonMappingException;
-//import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.JavaRestService1Application;
+import com.example.bean.InputValues;
+import com.example.bean.NumbersResult;
+import com.example.service.NumbersOperationsService;
 
 @RestController
-public class NumbersSumController {
+public class NumbersController {
 
+	@Autowired
+	private NumbersOperationsService numbersOperations;
 	private static final Logger logger = LogManager.getLogger(JavaRestService1Application.class);
 
-	 @RequestMapping(value = "/sumPost", method = RequestMethod.POST)
-	    public ResponseEntity<NumbersSum> calculateSum2(@RequestBody InputNumbers input) {
-		 	int n1 = input.getNum1();
-		 	int n2 = input.getNum2();
-		 	NumbersSum ns = new NumbersSum(n1, n2);
-		 	logger.info("Number 1 : {}", ns.getNumberOne());
-		 	logger.info("Number 2 : {}", ns.getNumberTwo());
-		 	logger.info("Sum : {}", ns.getSum());
-	        return ResponseEntity.accepted().body(ns);
-	    }
-	
-	/*@GetMapping("/sum")
-	public NumbersSum calculateSum(@RequestParam(value="numbers")String numbers) throws JsonMappingException, JsonProcessingException {
-		final InputNumbers input = new ObjectMapper().readValue(numbers, InputNumbers.class);
-		int num1 = input.getNum1();
-		int num2 = input.getNum2();
-		logger.info("Number 1 : {}", num1);
-	 	logger.info("Number 2 : {}", num2);
-	 	logger.info("Sum : {}", num1+num2);
-		return new NumbersSum(num1, num2, num1+num2);
+	@PostMapping(value = "/result")
+	public ResponseEntity<NumbersResult> calculateResult(@RequestBody InputValues input) {
+		int a = input.getNumberOne();
+		int b = input.getNumberTwo();
+		char op = input.getOp();
+		double result=0;
+		String error = "";
+		switch(op) {
+			case '+': result = numbersOperations.getSum(a, b);
+				break;
+			case '-': result = numbersOperations.getDifference(a, b);
+				break;
+			case '*': result = numbersOperations.getProduct(a, b);
+				break;
+			case '/': {
+				result = numbersOperations.getDivision(a, b);
+				if(result==-99999)
+				{
+					logger.error("Divide By 0 Error");
+					error = "DIVIDE BY 0";
+				}
+			}
+				break;
+			default: logger.error("Invalid Operator");
+		}
+		NumbersResult nr = new NumbersResult(a, b, op, result, error);
+		return ResponseEntity.accepted().body(nr);
 	}
 	
-	@GetMapping("/sumWithoutParam")
-	public NumbersSum calculateSum1(InputNumbers numbers) {
-		// InputNumbers in = (InputNumbers)numbers;
-		int num1 = numbers.getNum1();
-		int num2 = numbers.getNum2();
-		logger.info("Number 1 : {}", num1);
-	 	logger.info("Number 2 : {}", num2);
-	 	logger.info("Sum : {}", num1+num2);
-		return new NumbersSum(num1, num2, num1+num2);
-	}
 	
-	@GetMapping("/")
-	public String showMessage() {
-		return "Hello";
-	}*/
 }

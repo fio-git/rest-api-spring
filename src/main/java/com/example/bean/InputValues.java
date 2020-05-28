@@ -1,33 +1,20 @@
-package com.accenture.bean;
+package com.example.bean;
 
-public class NumbersSum {
-	
+public class InputValues {
 	int numberOne;
 	int numberTwo;
-	int sum;
+	char op;
 	
-	public NumbersSum() {
+	public InputValues() {
 		super();
 	}
 	
-	
-	public NumbersSum(int numberOne, int numberTwo) {
+	public InputValues(int numberOne, int numberTwo, char op) {
 		super();
 		this.numberOne = numberOne;
 		this.numberTwo = numberTwo;
-		this.sum = this.numberOne + this.numberTwo;
+		this.op = op;
 	}
-
-
-	public int getSum() {
-		return sum;
-	}
-
-
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
-
 
 	public int getNumberOne() {
 		return numberOne;
@@ -41,7 +28,12 @@ public class NumbersSum {
 	public void setNumberTwo(int numberTwo) {
 		this.numberTwo = numberTwo;
 	}
+	public char getOp() {
+		return op;
+	}
+	public void setOp(char op) {
+		this.op = op;
+	}
 	
 	
-
 }
