@@ -1,15 +1,15 @@
 package com.example.bean;
 
 public class NumbersResult {
-	int numberOne;
-	int numberTwo;
+	double numberOne;
+	double numberTwo;
 	char op;
 	double result;
 	String error;
 	public NumbersResult() {
 		super();
 	}
-	public NumbersResult(int numberOne, int numberTwo, char op, double result, String error) {
+	public NumbersResult(double numberOne, double numberTwo, char op, double result, String error) {
 		super();
 		this.numberOne = numberOne;
 		this.numberTwo = numberTwo;
@@ -17,22 +17,16 @@ public class NumbersResult {
 		this.result = result;
 		this.error = error;
 	}
-	public String getError() {
-		return error;
-	}
-	public void setError(String error) {
-		this.error = error;
-	}
-	public int getNumberOne() {
+	public double getNumberOne() {
 		return numberOne;
 	}
-	public void setNumberOne(int numberOne) {
+	public void setNumberOne(double numberOne) {
 		this.numberOne = numberOne;
 	}
-	public int getNumberTwo() {
+	public double getNumberTwo() {
 		return numberTwo;
 	}
-	public void setNumberTwo(int numberTwo) {
+	public void setNumberTwo(double numberTwo) {
 		this.numberTwo = numberTwo;
 	}
 	public char getOp() {
@@ -47,5 +41,11 @@ public class NumbersResult {
 	public void setResult(double result) {
 		this.result = result;
 	}
-
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	
 }

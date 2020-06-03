@@ -22,28 +22,15 @@ public class NumbersController {
 
 	@PostMapping(value = "/result")
 	public ResponseEntity<NumbersResult> calculateResult(@RequestBody InputValues input) {
-		int a = input.getNumberOne();
-		int b = input.getNumberTwo();
+		double a = input.getNumberOne();
+		double b = input.getNumberTwo();
 		char op = input.getOp();
-		double result=0;
-		String error = "";
-		switch(op) {
-			case '+': result = numbersOperations.getSum(a, b);
-				break;
-			case '-': result = numbersOperations.getDifference(a, b);
-				break;
-			case '*': result = numbersOperations.getProduct(a, b);
-				break;
-			case '/': {
-				result = numbersOperations.getDivision(a, b);
-				if(result==-99999)
-				{
-					logger.error("Divide By 0 Error");
-					error = "DIVIDE BY 0";
-				}
-			}
-				break;
-			default: logger.error("Invalid Operator");
+		double result=numbersOperations.getResult(a, b, op);
+		String error = "NA";
+		if(result==0.0)
+		{
+			logger.error("Divide By 0 Error");
+			error = "ERROR OCCURRED! CHECK OPERANDS AND OPERATORS";
 		}
 		NumbersResult nr = new NumbersResult(a, b, op, result, error);
 		return ResponseEntity.accepted().body(nr);

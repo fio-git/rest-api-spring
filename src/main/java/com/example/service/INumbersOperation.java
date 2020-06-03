@@ -1,8 +1,8 @@
 package com.example.service;
 
 public interface INumbersOperation {
-	int getSum(int a, int b);
-	int getDifference(int a, int b);
-	int getProduct(int a, int b);
-	double getDivision(int a, int b);
+	double getSum(double a, double b);
+	double getDifference(double a, double b);
+	double getProduct(double a, double b);
+	double getDivision(double a, double b);
 }

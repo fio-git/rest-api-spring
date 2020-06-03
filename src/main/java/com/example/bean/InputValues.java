@@ -1,39 +1,46 @@
 package com.example.bean;
 
 public class InputValues {
-	int numberOne;
-	int numberTwo;
+	double numberOne;
+	double numberTwo;
 	char op;
 	
 	public InputValues() {
 		super();
 	}
-	
-	public InputValues(int numberOne, int numberTwo, char op) {
+
+	public InputValues(double numberOne, double numberTwo, char op) {
 		super();
 		this.numberOne = numberOne;
 		this.numberTwo = numberTwo;
 		this.op = op;
 	}
 
-	public int getNumberOne() {
+	public double getNumberOne() {
 		return numberOne;
 	}
-	public void setNumberOne(int numberOne) {
+
+	public void setNumberOne(double numberOne) {
 		this.numberOne = numberOne;
 	}
-	public int getNumberTwo() {
+
+	public double getNumberTwo() {
 		return numberTwo;
 	}
-	public void setNumberTwo(int numberTwo) {
+
+	public void setNumberTwo(double numberTwo) {
 		this.numberTwo = numberTwo;
 	}
+
 	public char getOp() {
 		return op;
 	}
+
 	public void setOp(char op) {
 		this.op = op;
 	}
+	
+	
 	
 	
 }
